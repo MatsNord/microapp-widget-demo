@@ -4,13 +4,13 @@ defineProps<{ partnerCode: string | null }>();
 
 <template>
   <div v-if="partnerCode" class="partner-banner">
-    <img :src="`/banners/${partnerCode}.png`" :alt="`Partner Banner PartnerCode: ${partnerCode}`" />
+   Partner widget för partner nr: <strong>{{ partnerCode }}</strong>
   </div>
 </template>
 
 <style scoped>
 .partner-banner {
-  text-align: center;
+  text-align: right;
   margin-bottom: 1em;
 }
 </style>

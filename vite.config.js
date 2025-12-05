@@ -8,7 +8,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@microapp': path.resolve(__dirname, 'microapp/src'),
-      // ...other aliases if present
     },
   },
   server: {
