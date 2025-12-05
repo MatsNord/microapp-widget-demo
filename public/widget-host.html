@@ -1,0 +1,47 @@
+<!-- public/widget-host.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Widget Host Demo</title>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; }
+    .widget-frame {
+      width: 400px;
+      height: 500px;
+      border: 1px solid #ccc;
+      margin: 2em auto;
+      display: block;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Widget Host Demo</h1>
+  <p>
+      Message from widget: <strong id="widget-message"></strong>    
+  </p>
+  <iframe
+    id="widget-iframe"
+    class="widget-frame"
+    src="http://localhost:5174/"
+    sandbox="allow-scripts allow-same-origin"
+  ></iframe>
+
+  <script>
+    // Skicka partnerkod till widgeten när iframen laddats
+    const iframe = document.getElementById('widget-iframe');
+    iframe.onload = () => {
+      const url = new URL(iframe.src);
+      const origin = url.origin;
+      iframe.contentWindow.postMessage({ partnerCode: 'Demo 42' }, origin );
+    };
+
+    // Ta emot meddelanden från widgeten
+    window.addEventListener('message', (event) => {
+      // Kontrollera event.origin för säkerhet i produktion!
+      document.querySelector('#widget-message').textContent = event.data.type;
+    });
+  </script>
+</body>
+</html>

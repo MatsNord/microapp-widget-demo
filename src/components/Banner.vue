@@ -4,7 +4,7 @@ defineProps<{ partnerCode: string | null }>();
 
 <template>
   <div v-if="partnerCode" class="partner-banner">
-   Partner widget för partner nr: <strong>{{ partnerCode }}</strong>
+   Message from hostingsidan: <strong>{{ partnerCode }}</strong>
   </div>
 </template>
 

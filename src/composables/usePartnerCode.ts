@@ -1,12 +1,16 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const allowedOrigin = 'https://boende.bolaget.se'
+//const allowedOrigin = 'https://boende.bolaget.se'
+const allowedOrigin = 'http://localhost:5174'
+
 
 export function usePartnerCode() {
   const partnerCode = ref<string | null>(null);
 
   function handleMessage(event: MessageEvent) {
+
     if (event.origin !== allowedOrigin) {
+      console.warn('Ignored message from untrusted origin:', event.origin);
       return
     }
 
@@ -17,7 +21,6 @@ export function usePartnerCode() {
 
   onMounted(() => {
     window.addEventListener('message', handleMessage);
-    partnerCode.value = '42'; // For testing purposes
     window.parent.postMessage({ type: 'widgetReady' }, allowedOrigin); 
   });
 
